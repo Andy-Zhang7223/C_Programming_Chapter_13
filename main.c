@@ -1,18 +1,45 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 
-int string_reverser() {
-    char str[100];
-    printf("Enter a string: ");
-    gets(str);
-    int len = strlen(str);
-    printf("Reversed: ");
-    for (int i = len-1; i >= 0; i--) {
-        printf("%c", str[i]);
+int i = 0;
+
+void removeSpaces(const char *input, char *output) {
+    int i = 0, j = 0;
+    while (input[i] != '\0') {
+        if (input[i] != ' ' && input[i] != ',' && input[i] != '.' && input[i] != '-'
+            && input[i] != '_' && input[i] != '?' && input[i] != '!') {
+            output[j++] = input[i];
+            }
+        i++;
+    }
+    output[j] = '\0';
+}
+
+int palindromechecker() {
+    bool isPalindrome = true;
+    int top = 0;
+    char phrase[100] = "";
+    printf("Enter a phrase: ");
+    fgets(phrase, sizeof(phrase), stdin);
+    removeSpaces(phrase, phrase);
+    top = strlen(phrase) - 2;
+    for (int *p = &i; top > 0; (*p)++) {
+        phrase[i] = toupper(phrase[i]);
+        phrase[top] = toupper(phrase[top]);
+        if (phrase[i] != phrase[top]) {
+            printf("Not a Palindrome\n");
+            isPalindrome = false;
+            break;
+        }
+        top--;
+    }
+    if (isPalindrome) {
+        printf("Palindrome\n");
     }
 }
 
-int main() {
-    string_reverser();
+int main(void) {
+    palindromechecker();
     return 0;
 }
