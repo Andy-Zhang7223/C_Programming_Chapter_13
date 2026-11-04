@@ -24,15 +24,19 @@ int palindromechecker() {
     fgets(phrase, sizeof(phrase), stdin);
     removeSpaces(phrase, phrase);
     top = strlen(phrase) - 2;
-    for (int *p = &i; top > 0; (*p)++) {
+    char phrase2[100] = "";
+    int top2 = top;
+    for (int x = 0; x <= top; x++) {
+        phrase2[x] = toupper(phrase[top2]);
+        top2--;
+    }
+    for (int *p = &i; i <= top; (*p)++) {
         phrase[i] = toupper(phrase[i]);
-        phrase[top] = toupper(phrase[top]);
-        if (phrase[i] != phrase[top]) {
+        if (phrase[i] != phrase2[i]) {
             printf("Not a Palindrome\n");
             isPalindrome = false;
             break;
         }
-        top--;
     }
     if (isPalindrome) {
         printf("Palindrome\n");
